@@ -13,7 +13,7 @@ const Header = () => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark px-3">
-      <Link className="navbar-brand" to="/">
+      <Link className="navbar-brand text-white" to="/">
         Rạp Phim Online
       </Link>
 
