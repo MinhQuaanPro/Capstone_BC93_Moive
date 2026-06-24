@@ -27,7 +27,7 @@ const Header = () => {
             >
               {user.hoTen ? user.hoTen.charAt(0).toUpperCase() : "U"}
             </div>
-            <span className="me-3">{user.taiKhoan}</span>
+            <span className="me-3 text-white">{user.taiKhoan}</span>
             <button className="btn btn-outline-danger" onClick={handleLogout}>
               Logout
             </button>
