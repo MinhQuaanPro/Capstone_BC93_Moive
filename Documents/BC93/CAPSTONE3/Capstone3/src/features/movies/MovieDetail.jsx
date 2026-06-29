@@ -41,6 +41,7 @@ const MovieDetail = () => {
             <strong>Ngày khởi chiếu:</strong> {detail.ngayKhoiChieu}
           </p>
           <p>{detail.moTa}</p>
+          <h4>Đặt Vé</h4>
           <div
             style={{
               maxHeight: "400px",

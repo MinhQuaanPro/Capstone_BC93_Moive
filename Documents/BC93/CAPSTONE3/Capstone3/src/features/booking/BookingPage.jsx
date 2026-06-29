@@ -54,17 +54,18 @@ const BookingPage = () => {
           Sơ đồ ghế
         </h3>
 
-        <div className="flex justify-center gap-6 mb-6 text-sm">
+        {/* Thanh chú thích trạng thái ghế */}
+        <div className="flex justify-center items-center gap-8 mb-6 text-sm">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 bg-red-500 rounded"></div>
+            <div className="w-5 h-5 bg-danger rounded"></div>
             <span>Đã đặt</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 bg-green-500 rounded"></div>
+            <div className="w-5 h-5 bg-success rounded"></div>
             <span>Đang chọn</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 bg-gray-200 border rounded"></div>
+            <div className="w-5 h-5 bg-gray rounded"></div>
             <span>Trống</span>
           </div>
         </div>
