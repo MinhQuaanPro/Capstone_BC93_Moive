@@ -21,7 +21,6 @@ export const userLogin = createAsyncThunk(
     try {
       const res = await login(formData);
       const token = res.data.content.accessToken;
-      // Lưu token và user vào localStorage
       localStorage.setItem("accessToken", token);
       localStorage.setItem("user", JSON.stringify(res.data.content));
       alert("Đăng nhập thành công!");
@@ -38,7 +37,6 @@ export const userProfile = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await getProfile();
-      // Cập nhật lại user trong localStorage
       localStorage.setItem("user", JSON.stringify(res.data.content));
       return res.data.content;
     } catch (err) {
@@ -65,7 +63,6 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Register
       .addCase(userRegister.pending, (state) => {
         state.loading = true;
         state.error = null;

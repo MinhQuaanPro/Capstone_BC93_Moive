@@ -41,40 +41,37 @@ const MovieDetail = () => {
             <strong>Ngày khởi chiếu:</strong> {detail.ngayKhoiChieu}
           </p>
           <p>{detail.moTa}</p>
-          <div className="mt-3">
-            <h5 className="fw-bold mb-2">Đặt Vé</h5>
-            <div
-              style={{
-                maxHeight: "200px",
-                overflowY: "auto",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                padding: "10px",
-                background: "#f9f9f9",
-              }}
-            >
-              {detail.heThongRapChieu?.map((rap) => (
-                <div key={rap.maHeThongRap} className="mb-3">
-                  <h6 className="text-danger">{rap.tenHeThongRap}</h6>
-                  {rap.cumRapChieu?.map((cum) => (
-                    <div key={cum.maCumRap} className="mb-2">
-                      <p className="fw-bold">{cum.tenCumRap}</p>
-                      <div className="d-flex flex-wrap gap-2">
-                        {cum.lichChieuPhim?.map((lich) => (
-                          <Link
-                            key={lich.maLichChieu}
-                            to={`/booking/${lich.maLichChieu}`}
-                            className="btn btn-outline-primary btn-sm"
-                          >
-                            {new Date(lich.ngayChieuGioChieu).toLocaleString()}
-                          </Link>
-                        ))}
-                      </div>
+          <div
+            style={{
+              maxHeight: "400px",
+              overflowY: "auto",
+              border: "1px solid #ddd",
+              borderRadius: "8px",
+              padding: "10px",
+              background: "#f9f9f9",
+            }}
+          >
+            {detail.heThongRapChieu?.map((rap) => (
+              <div key={rap.maHeThongRap} className="mb-3">
+                <h6 className="text-danger">{rap.tenHeThongRap}</h6>
+                {rap.cumRapChieu?.map((cum) => (
+                  <div key={cum.maCumRap} className="mb-2">
+                    <p className="fw-bold">{cum.tenCumRap}</p>
+                    <div className="d-flex flex-wrap gap-2">
+                      {cum.lichChieuPhim?.map((lich) => (
+                        <Link
+                          key={lich.maLichChieu}
+                          to={`/booking/${lich.maLichChieu}`}
+                          className="btn btn-outline-primary btn-sm"
+                        >
+                          {new Date(lich.ngayChieuGioChieu).toLocaleString()}
+                        </Link>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              ))}
-            </div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -21,8 +21,8 @@ const LoginPage = () => {
     e.preventDefault();
     dispatch(userLogin(formData))
       .unwrap()
-      .then(() => navigate("/")) // chuyển về trang chủ sau khi login thành công
-      .catch(() => {}); // lỗi đã được xử lý trong slice
+      .then(() => navigate("/"))
+      .catch(() => {});
   };
 
   return (
