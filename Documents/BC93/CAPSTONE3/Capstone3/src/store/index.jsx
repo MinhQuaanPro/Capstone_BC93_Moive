@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import movieReducer from "../features/movies/movieSlice";
-import bookingReducer from "../features/booking/bookingSlice";
-import userReducer from "../features/user/userSlice";
+import movieReducer from "../HomeTemplate/movies/movieSlice";
+import bookingReducer from "../HomeTemplate/booking/bookingSlice";
+import userReducer from "../HomeTemplate/user/userSlice";
 
 const store = configureStore({
   reducer: {

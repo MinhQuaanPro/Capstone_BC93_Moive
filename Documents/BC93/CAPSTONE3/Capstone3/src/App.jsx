@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import HomePage from "./features/movies/HomePage";
-import MovieDetail from "./features/movies/MovieDetail";
-import BookingPage from "./features/booking/BookingPage";
-import Login from "./features/user/Login";
-import Register from "./features/user/Register";
-import ProfilePage from "./features/user/ProfilePage"; // thêm mới
+import HomePage from "./HomeTemplate/movies/HomePage";
+import MovieDetail from "./HomeTemplate/movies/MovieDetail";
+import BookingPage from "./HomeTemplate/booking/BookingPage";
+import Login from "./HomeTemplate/user/Login";
+import Register from "./HomeTemplate/user/Register";
+import ProfilePage from "./HomeTemplate/user/ProfilePage";
 
 function App() {
   return (

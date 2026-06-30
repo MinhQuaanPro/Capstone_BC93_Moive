@@ -22,7 +22,7 @@ const ProfilePage = () => {
       matKhau: e.target.matKhau.value,
       email: e.target.email.value,
       soDt: e.target.soDt.value,
-      maNhom: "GP01", // tuỳ dự án
+      maNhom: "GP01",
       maLoaiNguoiDung: user.maLoaiNguoiDung,
       hoTen: e.target.hoTen.value,
     };
@@ -33,7 +33,6 @@ const ProfilePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 py-10 px-6">
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-8">
-        {/* Tabs */}
         <div className="flex border-b border-gray-300 mb-6">
           <button
             onClick={() => setActiveTab("info")}
@@ -65,7 +64,6 @@ const ProfilePage = () => {
           )}
         </div>
 
-        {/* Nội dung tab */}
         {activeTab === "info" && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex flex-col items-center border-r md:border-r-2 border-indigo-100 pr-4">

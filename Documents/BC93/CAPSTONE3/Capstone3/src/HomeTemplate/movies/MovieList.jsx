@@ -98,7 +98,6 @@ const MovieList = () => {
         style={{ height: "600px", overflowY: "auto" }}
       >
         <div className="row mt-5" style={{ height: "600px" }}>
-          {/* Cột trái: Hệ thống rạp */}
           <div
             className="col-md-4 border-end"
             style={{ height: "100%", overflowY: "auto" }}
@@ -130,7 +129,6 @@ const MovieList = () => {
             ))}
           </div>
 
-          {/* Cột phải: Lịch chiếu */}
           <div
             className="col-md-8"
             style={{ height: "100%", overflowY: "auto" }}

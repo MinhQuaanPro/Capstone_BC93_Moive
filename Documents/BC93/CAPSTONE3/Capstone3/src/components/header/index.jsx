@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../features/user/userSlice";
+import { logout } from "../../HomeTemplate/user/userSlice";
 import { Link } from "react-router-dom";
 
 const Header = () => {

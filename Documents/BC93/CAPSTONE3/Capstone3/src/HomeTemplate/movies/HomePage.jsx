@@ -21,7 +21,7 @@ const HomePage = () => {
   return (
     <div>
       <header
-        className="relative w-full h-[80vh] flex items-center justify-center text-white mb-10"
+        className="relative w-full h-[800px] flex items-center justify-center text-white mb-10"
         style={{
           backgroundImage:
             banners.length > 0 ? `url(${banners[0].hinhAnh})` : "",
@@ -30,10 +30,8 @@ const HomePage = () => {
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* Overlay mờ để chữ nổi bật hơn */}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-        {/* Nội dung banner */}
         <div className="relative z-10 text-center px-6">
           <h1 className="text-5xl md:text-6xl font-extrabold drop-shadow-lg">
             Chào mừng bạn đến với Rạp Phim Online
