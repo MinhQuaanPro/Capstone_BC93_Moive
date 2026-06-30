@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userProfile, logout } from "./userSlice";
+import { userProfile, logout, userUpdateProfile } from "./userSlice";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const { user, loading, error } = useSelector((state) => state.user);
-  const [activeTab, setActiveTab] = useState("info"); // info | history | edit
+  const [activeTab, setActiveTab] = useState("info");
 
   useEffect(() => {
     dispatch(userProfile());
@@ -15,6 +15,21 @@ const ProfilePage = () => {
   if (error) return <p className="text-center text-red-500 mt-10">{error}</p>;
   if (!user) return <p className="text-center mt-10">Chưa có dữ liệu người dùng</p>;
 
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    const formData = {
+      taiKhoan: user.taiKhoan,
+      matKhau: e.target.matKhau.value,
+      email: e.target.email.value,
+      soDt: e.target.soDt.value,
+      maNhom: "GP01", // tuỳ dự án
+      maLoaiNguoiDung: user.maLoaiNguoiDung,
+      hoTen: e.target.hoTen.value,
+    };
+    dispatch(userUpdateProfile(formData));
+    setActiveTab("info");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 py-10 px-6">
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-8">
@@ -22,7 +37,7 @@ const ProfilePage = () => {
         <div className="flex border-b border-gray-300 mb-6">
           <button
             onClick={() => setActiveTab("info")}
-            className={`px-6 py-2 font-semibold border-t border-l border-r rounded-t-lg ${
+            className={`px-6 py-2 font-semibold ${
               activeTab === "info"
                 ? "bg-indigo-600 text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -32,7 +47,7 @@ const ProfilePage = () => {
           </button>
           <button
             onClick={() => setActiveTab("history")}
-            className={`px-6 py-2 font-semibold border-t border-l border-r rounded-t-lg ml-2 ${
+            className={`px-6 py-2 font-semibold ml-2 ${
               activeTab === "history"
                 ? "bg-indigo-600 text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -42,7 +57,7 @@ const ProfilePage = () => {
           </button>
           {activeTab === "edit" && (
             <button
-              className="px-6 py-2 font-semibold border-t border-l border-r rounded-t-lg ml-2 bg-indigo-600 text-white"
+              className="px-6 py-2 font-semibold ml-2 bg-indigo-600 text-white"
               disabled
             >
               CẬP NHẬT THÔNG TIN
@@ -61,7 +76,6 @@ const ProfilePage = () => {
               />
               <h2 className="text-xl font-bold text-indigo-700">{user.hoTen}</h2>
               <p className="text-sm text-gray-600">{user.maLoaiNguoiDung}</p>
-
               <div className="mt-6 w-full">
                 <button
                   onClick={() => setActiveTab("edit")}
@@ -77,28 +91,13 @@ const ProfilePage = () => {
                 </button>
               </div>
             </div>
-
             <div className="md:col-span-2 pl-4">
-              <h3 className="text-2xl font-bold text-indigo-700 mb-6">
-                📋 Thông tin cá nhân
-              </h3>
+              <h3 className="text-2xl font-bold text-indigo-700 mb-6">📋 Thông tin cá nhân</h3>
               <div className="space-y-4">
-                <div>
-                  <span className="font-semibold text-gray-700">Email: </span>
-                  <span>{user.email}</span>
-                </div>
-                <div>
-                  <span className="font-semibold text-gray-700">Số điện thoại: </span>
-                  <span>{user.soDT}</span>
-                </div>
-                <div>
-                  <span className="font-semibold text-gray-700">Tài khoản: </span>
-                  <span>{user.taiKhoan}</span>
-                </div>
-                <div>
-                  <span className="font-semibold text-gray-700">Loại người dùng: </span>
-                  <span>{user.maLoaiNguoiDung}</span>
-                </div>
+                <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>Số điện thoại:</strong> {user.soDT}</p>
+                <p><strong>Tài khoản:</strong> {user.taiKhoan}</p>
+                <p><strong>Loại người dùng:</strong> {user.maLoaiNguoiDung}</p>
               </div>
             </div>
           </div>
@@ -106,27 +105,16 @@ const ProfilePage = () => {
 
         {activeTab === "history" && (
           <div>
-            <h3 className="text-2xl font-bold text-indigo-700 mb-6">
-              🎟️ Lịch sử đặt vé
-            </h3>
+            <h3 className="text-2xl font-bold text-indigo-700 mb-6">🎟️ Lịch sử đặt vé</h3>
             {user.thongTinDatVe && user.thongTinDatVe.length > 0 ? (
               <div className="space-y-6">
                 {user.thongTinDatVe.map((ve, index) => (
-                  <div
-                    key={index}
-                    className="border rounded-lg p-4 shadow-sm hover:shadow-md transition"
-                  >
+                  <div key={index} className="border rounded-lg p-4 shadow-sm hover:shadow-md transition">
                     <p className="font-semibold text-indigo-600">{ve.tenPhim}</p>
-                    <p className="text-gray-700">
-                      Ngày chiếu: {ve.ngayDat} - Giờ: {ve.gioChieu}
-                    </p>
+                    <p className="text-gray-700">Ngày chiếu: {ve.ngayDat} - Giờ: {ve.gioChieu}</p>
                     <p className="text-gray-700">Rạp: {ve.tenRap}</p>
-                    <p className="text-gray-700">
-                      Ghế: {ve.danhSachGhe.map((g) => g.tenGhe).join(", ")}
-                    </p>
-                    <p className="text-red-600 font-bold">
-                      Giá vé: {ve.giaVe?.toLocaleString("vi-VN")} VNĐ
-                    </p>
+                    <p className="text-gray-700">Ghế: {ve.danhSachGhe.map((g) => g.tenGhe).join(", ")}</p>
+                    <p className="text-red-600 font-bold">Giá vé: {ve.giaVe?.toLocaleString("vi-VN")} VNĐ</p>
                   </div>
                 ))}
               </div>
@@ -138,52 +126,29 @@ const ProfilePage = () => {
 
         {activeTab === "edit" && (
           <div>
-            <h3 className="text-2xl font-bold text-indigo-700 mb-6">
-              ✏️ Cập nhật thông tin cá nhân
-            </h3>
-            <form className="space-y-4">
+            <h3 className="text-2xl font-bold text-indigo-700 mb-6">✏️ Cập nhật thông tin cá nhân</h3>
+            <form className="space-y-4" onSubmit={handleUpdate}>
               <div>
-                <label className="block font-semibold text-gray-700 mb-1">
-                  Họ tên
-                </label>
-                <input
-                  type="text"
-                  defaultValue={user.hoTen}
-                  className="w-full border rounded-lg p-2"
-                />
+                <label className="block font-semibold text-gray-700 mb-1">Họ tên</label>
+                <input name="hoTen" defaultValue={user.hoTen} className="w-full border rounded-lg p-2" />
               </div>
               <div>
-                <label className="block font-semibold text-gray-700 mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  defaultValue={user.email}
-                  className="w-full border rounded-lg p-2"
-                />
+                <label className="block font-semibold text-gray-700 mb-1">Email</label>
+                <input name="email" defaultValue={user.email} className="w-full border rounded-lg p-2" />
               </div>
               <div>
-                <label className="block font-semibold text-gray-700 mb-1">
-                  Số điện thoại
-                </label>
-                <input
-                  type="text"
-                  defaultValue={user.soDT}
-                  className="w-full border rounded-lg p-2"
-                />
+                <label className="block font-semibold text-gray-700 mb-1">Số điện thoại</label>
+                <input name="soDt" defaultValue={user.soDT} className="w-full border rounded-lg p-2" />
+              </div>
+              <div>
+                <label className="block font-semibold text-gray-700 mb-1">Mật khẩu</label>
+                <input name="matKhau" type="password" className="w-full border rounded-lg p-2" />
               </div>
               <div className="flex gap-4 mt-6">
-                <button
-                  type="submit"
-                  className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700"
-                >
+                <button type="submit" className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700">
                   Lưu thay đổi
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveTab("info")}
-                  className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400"
-                >
+                <button type="button" onClick={() => setActiveTab("info")} className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400">
                   Hủy
                 </button>
               </div>

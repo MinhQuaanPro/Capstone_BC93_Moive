@@ -36,7 +36,7 @@ const Header = () => {
             </Link>
 
             <button className="btn btn-outline-danger" onClick={handleLogout}>
-              Logout
+              Đăng Xuất
             </button>
           </>
         ) : (

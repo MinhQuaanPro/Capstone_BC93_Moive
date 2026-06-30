@@ -1,49 +1,52 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { register, login, getProfile } from "../../services/userService";
+import { register, login, getProfile, updateProfile } from "../../services/userService";
 
-export const userRegister = createAsyncThunk(
-  "user/register",
-  async (formData, { rejectWithValue }) => {
-    try {
-      const res = await register(formData);
-      alert("Đăng ký thành công!");
-      return res.data.content;
-    } catch (err) {
-      alert(err.response?.data?.content || "Đăng ký thất bại, vui lòng thử lại!");
-      return rejectWithValue(err.response?.data);
-    }
+export const userRegister = createAsyncThunk("user/register", async (formData, { rejectWithValue }) => {
+  try {
+    const res = await register(formData);
+    alert("Đăng ký thành công!");
+    return res.data.content;
+  } catch (err) {
+    alert(err.response?.data?.content || "Đăng ký thất bại, vui lòng thử lại!");
+    return rejectWithValue(err.response?.data);
   }
-);
+});
 
-export const userLogin = createAsyncThunk(
-  "user/login",
-  async (formData, { rejectWithValue }) => {
-    try {
-      const res = await login(formData);
-      const token = res.data.content.accessToken;
-      localStorage.setItem("accessToken", token);
-      localStorage.setItem("user", JSON.stringify(res.data.content));
-      alert("Đăng nhập thành công!");
-      return res.data.content;
-    } catch (err) {
-      alert(err.response?.data?.content || "Đăng nhập thất bại!");
-      return rejectWithValue(err.response?.data);
-    }
+export const userLogin = createAsyncThunk("user/login", async (formData, { rejectWithValue }) => {
+  try {
+    const res = await login(formData);
+    const token = res.data.content.accessToken;
+    localStorage.setItem("accessToken", token);
+    localStorage.setItem("user", JSON.stringify(res.data.content));
+    alert("Đăng nhập thành công!");
+    return res.data.content;
+  } catch (err) {
+    alert(err.response?.data?.content || "Đăng nhập thất bại!");
+    return rejectWithValue(err.response?.data);
   }
-);
+});
 
-export const userProfile = createAsyncThunk(
-  "user/profile",
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await getProfile();
-      localStorage.setItem("user", JSON.stringify(res.data.content));
-      return res.data.content;
-    } catch (err) {
-      return rejectWithValue(err.response?.data);
-    }
+export const userProfile = createAsyncThunk("user/profile", async (_, { rejectWithValue }) => {
+  try {
+    const res = await getProfile();
+    localStorage.setItem("user", JSON.stringify(res.data.content));
+    return res.data.content;
+  } catch (err) {
+    return rejectWithValue(err.response?.data);
   }
-);
+});
+
+export const userUpdateProfile = createAsyncThunk("user/updateProfile", async (formData, { rejectWithValue }) => {
+  try {
+    const res = await updateProfile(formData);
+    alert("Cập nhật thông tin thành công!");
+    localStorage.setItem("user", JSON.stringify(res.data.content));
+    return res.data.content;
+  } catch (err) {
+    alert(err.response?.data?.content || "Cập nhật thất bại!");
+    return rejectWithValue(err.response?.data);
+  }
+});
 
 const savedUser = localStorage.getItem("user");
 
@@ -75,7 +78,6 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
       .addCase(userLogin.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -88,9 +90,20 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
       .addCase(userProfile.fulfilled, (state, action) => {
         state.user = action.payload;
+      })
+      .addCase(userUpdateProfile.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(userUpdateProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(userUpdateProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
