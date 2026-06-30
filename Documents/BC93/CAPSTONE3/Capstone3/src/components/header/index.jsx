@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark px-3">
       <Link className="navbar-brand text-white" to="/">
-        Rạp Phim Online
+       🎬 Rạp Phim Online
       </Link>
 
       <div className="ms-auto d-flex align-items-center">

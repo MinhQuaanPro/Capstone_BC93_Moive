@@ -98,7 +98,11 @@ const MovieList = () => {
         style={{ height: "600px", overflowY: "auto" }}
       >
         <div className="row mt-5" style={{ height: "600px" }}>
-          <div className="col-md-4 border-end">
+          {/* Cột trái: Hệ thống rạp */}
+          <div
+            className="col-md-4 border-end"
+            style={{ height: "100%", overflowY: "auto" }}
+          >
             <h2 className="text-2xl font-bold mb-4 text-green-600">
               🏢 Hệ Thống Rạp
             </h2>
@@ -126,9 +130,10 @@ const MovieList = () => {
             ))}
           </div>
 
+          {/* Cột phải: Lịch chiếu */}
           <div
             className="col-md-8"
-            style={{ overflowY: "auto", height: "100%" }}
+            style={{ height: "100%", overflowY: "auto" }}
           >
             <h2 className="text-2xl font-bold mb-4 text-blue-600">
               🎬 Lịch Chiếu
