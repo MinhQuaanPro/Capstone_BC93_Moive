@@ -7,6 +7,7 @@ import MovieDetail from "./features/movies/MovieDetail";
 import BookingPage from "./features/booking/BookingPage";
 import Login from "./features/user/Login";
 import Register from "./features/user/Register";
+import ProfilePage from "./features/user/ProfilePage"; // thêm mới
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
         <Route path="/booking/:showtimeId" element={<BookingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<ProfilePage />} /> {/* route mới */}
       </Routes>
+
       <Footer />
     </Router>
   );
