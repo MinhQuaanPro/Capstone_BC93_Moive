@@ -4,8 +4,8 @@ import { Provider, useSelector } from "react-redux";
 import store from "./store";
 
 // Home Template
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/header";
+import Footer from "./components/footer";
 import HomePage from "./HomeTemplate/movies/HomePage";
 import MovieDetail from "./HomeTemplate/movies/MovieDetail";
 import BookingPage from "./HomeTemplate/booking/BookingPage";
