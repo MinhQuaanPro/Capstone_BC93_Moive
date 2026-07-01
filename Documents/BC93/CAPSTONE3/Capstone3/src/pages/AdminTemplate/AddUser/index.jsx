@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, clearMessage } from "./slice";
+import { addUser } from "./slice";
 
 export default function AddUser() {
   const dispatch = useDispatch();

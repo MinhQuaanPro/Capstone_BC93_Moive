@@ -20,14 +20,16 @@ import Dashboard from "./pages/AdminTemplate/Dashboard";
 import AddUser from "./pages/AdminTemplate/AddUser";
 import UserManagement from "./pages/AdminTemplate/UserManagement";
 
-// ✅ SỬA: Component bảo vệ route Admin
+// Movie Management - ✅ THÊM CÁC IMPORT NÀY
+import MovieManagement from "./pages/AdminTemplate/MovieManagement";
+import AddMovie from "./pages/AdminTemplate/MovieManagement/AddMovie";
+import EditMovie from "./pages/AdminTemplate/MovieManagement/EditMovie";
+import Showtime from "./pages/AdminTemplate/MovieManagement/Showtime"; // ✅ Quan trọng!
+
+// Component bảo vệ route Admin
 const AdminProtectedRoute = ({ children }) => {
   const authState = useSelector((state) => state.auth);
-  
-  // ✅ Check đúng: state.auth.data HOẶC localStorage
   const isAuth = authState.data || localStorage.getItem("user");
-  
-  // ✅ Thêm replace: true để tránh loop
   return isAuth ? children : <Navigate to="/admin/login" replace />;
 };
 
@@ -59,8 +61,16 @@ function App() {
             }
           >
             <Route index element={<Dashboard />} />
+            
+            {/* User Management */}
             <Route path="users" element={<UserManagement />} />
             <Route path="add-user" element={<AddUser />} />
+            
+            {/* Movie Management - ✅ THÊM CÁC ROUTE NÀY */}
+            <Route path="movies" element={<MovieManagement />} />
+            <Route path="movies/add" element={<AddMovie />} />
+            <Route path="movies/edit/:maPhim" element={<EditMovie />} />
+            <Route path="movies/showtime/:maPhim" element={<Showtime />} /> {/* ✅ Quan trọng! */}
           </Route>
 
           {/* ============ HOME ROUTES ============ */}
