@@ -149,12 +149,13 @@ const MovieList = () => {
                       <p className="fw-bold">{phim.tenPhim}</p>
                       <div className="d-flex flex-wrap gap-2">
                         {phim.lstLichChieuTheoPhim.map((lich) => (
-                          <button
+                          <Link
                             key={lich.maLichChieu}
+                            to={`/booking/${lich.maLichChieu}`}
                             className="btn btn-outline-primary btn-sm"
                           >
                             {new Date(lich.ngayChieuGioChieu).toLocaleString()}
-                          </button>
+                          </Link>
                         ))}
                       </div>
                     </div>
